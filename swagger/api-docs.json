@@ -1,0 +1,21 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Description of the service goes here",
+    "version": "2.0.0",
+    "title": "Insert Title",
+    "contact": {
+      "name": "Insert Team",
+      "email": "insert@email.com"
+    }
+  },
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Name of the path",
+      "description": "Description of the path"
+    }
+  ],
+  "paths": {}
+}
+

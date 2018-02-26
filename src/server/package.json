@@ -1,0 +1,35 @@
+{
+  "name": "seed-project",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./app.js",
+    "start-dev": "gulp serve",
+    "lint": "gulp lint",
+    "test": "gulp test"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.1",
+    "bunyan": "^1.8.3",
+    "bunyan-format": "^0.2.1",
+    "bunyan-rotating-file-stream": "^1.6.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "express": "~4.13.4",
+    "gulp": "^3.9.1",
+    "serve-favicon": "~2.3.0",
+    "swagger-node-express": "^2.1.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "eslint-config-airbnb-base": "^9.0.0",
+    "eslint-plugin-import": "^2.0.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-exit": "0.0.2",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-sequence": "^0.4.6"
+  }
+}
