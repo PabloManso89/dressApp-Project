@@ -4,10 +4,22 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
+import { ExpensesComponent } from './components/expenses/expenses.component';
+import { PurchasesComponent } from './components/purchases/purchases.component';
+import { SuggestionsComponent } from './components/suggestions/suggestions.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import {NavigationTabsComponent} from './components/navigation-tabs/navigation-tabs.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    ExpensesComponent,
+    PurchasesComponent,
+    SuggestionsComponent,
+    NotfoundComponent,
+    NavigationTabsComponent
   ],
   imports: [
     BrowserModule,
