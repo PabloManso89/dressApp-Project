@@ -8,7 +8,8 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', (req, res) => {
   logger.info('/ - incoming request');
-  res.sendFile(path.resolve('dist/index.html'));
+  res.sendFile(path.resolve('dist/src/client/index.html'));
 });
+
 
 module.exports = router;

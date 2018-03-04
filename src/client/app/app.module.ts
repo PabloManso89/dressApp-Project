@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { MatInputModule } from '@angular/material';
+import { MdTabsModule } from 'md-tabs/tabs';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -9,7 +11,9 @@ import { ExpensesComponent } from './components/expenses/expenses.component';
 import { PurchasesComponent } from './components/purchases/purchases.component';
 import { SuggestionsComponent } from './components/suggestions/suggestions.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
-import {NavigationTabsComponent} from './components/navigation-tabs/navigation-tabs.component';
+// import { NavigationTabsComponent } from './components/navigation-tabs/navigation-tabs.component';
+
+import { AppRoutingModule } from './routing/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,12 +23,13 @@ import {NavigationTabsComponent} from './components/navigation-tabs/navigation-t
     PurchasesComponent,
     SuggestionsComponent,
     NotfoundComponent,
-    NavigationTabsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    MatInputModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

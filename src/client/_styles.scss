@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "styles/base/_typography";
+@import "styles/layout/_responsive";
+@import "styles/layout/_layout";
+@import "styles/themes/_theme";
+
+// FOR MORE STYLE CLASSES GO TO https://getbootstrap.com/docs/3.3/css/
+//@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body, html {
+  font-family: 'Roboto';
+}
