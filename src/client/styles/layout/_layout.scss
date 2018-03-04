@@ -1,0 +1,15 @@
+@import "../abstracts/variables";
+
+html,
+body {
+  height: 100%;
+}
+
+.clearfix {
+  clear: both;
+}
+
+.btn {
+  width: $BUTTON_WIDTH*1px;
+}
+
