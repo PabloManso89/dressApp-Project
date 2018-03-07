@@ -6,5 +6,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./navigation-tabs.component.scss']
 })
 export class NavigationTabsComponent {
+  public navLinks = [
+    {
+      label: 'Home',
+      path: '/home'
+    },
+    {
+      label: 'Expenses',
+      path: '/expenses'
+    },
+    {
+      label: 'Suggestions',
+      path: '/suggestions'
+    },
+    {
+      label: 'Purchases',
+      path: '/purchases'
+    }
+  ]
+
   constructor() { }
 }

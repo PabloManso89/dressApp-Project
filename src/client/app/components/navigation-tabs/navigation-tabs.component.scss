@@ -1,31 +1,13 @@
-md-tab-group.md-tab {
-  //align-items: center;
-  //align-self: center;
-  align-content: center;
+body {
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
 }
 
-app-recon-tabs {
-  width: 100%;
+.basic-container {
+  padding: 5px;
 }
 
-md-tab-content {
-  overflow: auto;
-}
-
-.fill {
-  width: 100%;
-  height: 100%;
-}
-
-/* To enable floating tab headers / scrollable tab body */
-
-/* TODO: Need to enable this somehow
-.mat-tab-body-wrapper {
-  height: 100%;
-  height: -webkit-fill-available;
-}
-*/
-mat-tab-body-content {
-  width: 100%;
-  height: 90vh !important;
+.version-info {
+  font-size: 8pt;
+  float: right;
 }
