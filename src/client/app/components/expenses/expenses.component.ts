@@ -1,6 +1,7 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, OnInit, ViewEncapsulation, HostBinding} from '@angular/core';
 import * as c3 from 'c3';
+import { OverlayContainer } from '@angular/cdk/overlay';
+
 
 @Component({
     selector: 'app-expenses',
@@ -9,8 +10,11 @@ import * as c3 from 'c3';
     encapsulation: ViewEncapsulation.None
 })
 export class ExpensesComponent implements OnInit {
+  @HostBinding('class') componentCssClass;
   chart;
-  constructor() {}
+
+  constructor(public overlayContainer: OverlayContainer) {}
+
   ngOnInit() {
     this.chart = c3.generate({
       data: {
@@ -26,6 +30,11 @@ export class ExpensesComponent implements OnInit {
         }
       }
     });
+  }
+
+  onSetTheme(theme) {
+    this.overlayContainer.getContainerElement().classList.add(theme);
+    this.componentCssClass = theme;
   }
 
   onClickDonut () {

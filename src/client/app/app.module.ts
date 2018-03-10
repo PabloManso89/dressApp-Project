@@ -13,6 +13,7 @@ import { AppRoutingModule } from './routing/app-routing.module';
 import {NavigationTabsComponent} from './components/navigation-tabs/navigation-tabs.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import {OverlayContainer, OverlayModule} from '@angular/cdk/overlay';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     MatTabsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    OverlayModule
   ],
   providers: [],
   bootstrap: [AppComponent]
