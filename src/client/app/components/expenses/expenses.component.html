@@ -1,16 +1,24 @@
 <app-toolbar></app-toolbar>
 <app-navigation-tabs></app-navigation-tabs>
 <div id="chart"></div>
-<div fxLayout="row" fxLayoutAlign="space-around center">
+<div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="5px">
   <button mat-raised-button color="primary" (click)="onClickBar()"><i class="material-icons">equalizer</i> Bar Chart</button>
   <button mat-raised-button color="primary" (click)="onClickLine()"><i class="material-icons">timeline</i> Line Chart</button>
   <button mat-raised-button color="primary" (click)="onClickDonut()"><i class="material-icons">donut_large</i> Donut Chart</button>
 </div>
-<br>
-<button mat-raised-button color="primary">primary</button>
-<button mat-raised-button color="accent">accent</button>
-<button mat-raised-button color="warn">warn</button>
 <br><br>
-<button mat-raised-button color="primary" (click)="onSetTheme('my-app-theme')">Purple</button>
-<button mat-raised-button color="primary" (click)="onSetTheme('pink-theme')">Pink</button>
-<button mat-raised-button color="primary" (click)="onSetTheme('light-theme')">Blue</button>
+<div fxLayout="row" fxLayoutAlign="space-between stretch" >
+  <div fxLayout="row" fxLayoutAlign="start none" fxLayoutGap="10px">
+    <button mat-mini-fab color="primary" (click)="onChangeTheme()"><i class="material-icons">format_color_fill</i></button>
+    <span *ngIf="isTheme">
+      <button mat-mini-fab style="background-color: #673ab7" (click)="onSetTheme('my-app-theme')"></button>
+      <button mat-mini-fab style="background-color: #e91e63" (click)="onSetTheme('pink-theme')"></button>
+      <button mat-mini-fab style="background-color: #80deea" (click)="onSetTheme('light-theme')"></button>
+    </span>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="end">
+      <button mat-raised-button color="primary">primary</button>
+      <button mat-raised-button color="accent">accent</button>
+      <button mat-raised-button color="warn">warn</button>
+  </div>
+</div>

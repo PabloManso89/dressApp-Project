@@ -14,6 +14,9 @@ import {NavigationTabsComponent} from './components/navigation-tabs/navigation-t
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import {OverlayContainer, OverlayModule} from '@angular/cdk/overlay';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+
 
 
 @NgModule({
@@ -37,7 +40,8 @@ import {OverlayContainer, OverlayModule} from '@angular/cdk/overlay';
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    OverlayModule
+    OverlayModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

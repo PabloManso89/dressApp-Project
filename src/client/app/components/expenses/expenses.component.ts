@@ -12,6 +12,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 export class ExpensesComponent implements OnInit {
   @HostBinding('class') componentCssClass;
   chart;
+  isTheme = false;
 
   constructor(public overlayContainer: OverlayContainer) {}
 
@@ -32,9 +33,14 @@ export class ExpensesComponent implements OnInit {
     });
   }
 
+  onChangeTheme() {
+    this.isTheme = !this.isTheme;
+  }
+
   onSetTheme(theme) {
     this.overlayContainer.getContainerElement().classList.add(theme);
     this.componentCssClass = theme;
+    this.isTheme = !this.isTheme;
   }
 
   onClickDonut () {
