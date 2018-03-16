@@ -13,7 +13,7 @@ declare const require;
 // get the data
 const localeId = localStorage.getItem('localeId');
 
-if (localeId !== undefined) {
+if (localeId !== null) {
   // we use the webpack raw-loader to return the content as a string
   const translations = require(`raw-loader!./i18n/texts.` + localeId + `.xlf`);
 
