@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatInputModule } from '@angular/material';
@@ -22,6 +22,7 @@ import { AppRoutingModule } from './routing/app-routing.module';
     ExpensesComponent,
     PurchasesComponent,
     SuggestionsComponent,
+    NavigationTabsComponent,
     NotfoundComponent,
   ],
   imports: [
@@ -31,7 +32,11 @@ import { AppRoutingModule } from './routing/app-routing.module';
     MatInputModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr', useFactory: getLocalStorage }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function getLocalStorage() {
+  return (typeof window !== 'undefined') ? window.localStorage : null;
+}
