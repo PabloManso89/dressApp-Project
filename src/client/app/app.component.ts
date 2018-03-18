@@ -5,5 +5,17 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'app worxxx!';
+  language = undefined;
+  constructor() {}
+  public setLanguage = () => {
+    let localeId = localStorage.getItem('localeId');
+    if (localeId === 'es') {
+      localeId = 'fr';
+    } else {
+      localeId = 'es';
+    }
+    localStorage.setItem('localeId', localeId);
+    console.log('locale set to:' + localeId);
+    location.reload(true);
+  }
 }
