@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatInputModule, MatTabsModule, MatToolbarModule, MatButtonModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
-import { MatInputModule } from '@angular/material';
-import { MdTabsModule } from 'md-tabs/tabs';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -14,6 +13,13 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { NavigationTabsComponent } from './components/navigation-tabs/navigation-tabs.component';
 
 import { AppRoutingModule } from './routing/app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { OverlayModule} from '@angular/cdk/overlay';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+
+
 
 @NgModule({
   declarations: [
@@ -24,13 +30,21 @@ import { AppRoutingModule } from './routing/app-routing.module';
     SuggestionsComponent,
     NavigationTabsComponent,
     NotfoundComponent,
+    NavigationTabsComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     MatInputModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatTabsModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    OverlayModule,
+    FlexLayoutModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr', useFactory: getLocalStorage }],
   bootstrap: [AppComponent]

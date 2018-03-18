@@ -1,5 +1,6 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
+import {NavigationTabsComponent} from '../navigation-tabs/navigation-tabs.component';
 
 @Component({
     selector: 'app-home',

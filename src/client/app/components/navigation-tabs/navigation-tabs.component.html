@@ -1,16 +1,9 @@
- <md-tab-group>
-  <md-tabs md-center-tabs="true">
-    <md-tab label="Home">
-      <app-home></app-home>
-    </md-tab>
-    <md-tab label="Compras">
-      <app-purchases></app-purchases>
-    </md-tab>
-    <md-tab label="Gastos">
-      <app-expenses></app-expenses>
-    </md-tab>
-    <md-tab label="Sugerencias">
-      <app-suggestions></app-suggestions>
-    </md-tab>
-  </md-tabs>
-</md-tab-group>
+ <nav mat-tab-nav-bar>
+   <a mat-tab-link
+      *ngFor="let link of navLinks"
+      [routerLink]="link.path"
+      routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive">
+     {{link.label}}
+   </a>
+ </nav>
