@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatInputModule, MatTabsModule, MatToolbarModule, MatButtonModule } from '@angular/material';
+import { MatInputModule, MatTabsModule, MatToolbarModule, MatButtonModule, MatCardModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -44,7 +44,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatToolbarModule,
     MatButtonModule,
     OverlayModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatCardModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr', useFactory: getLocalStorage }],
   bootstrap: [AppComponent]

@@ -9,5 +9,5 @@ import {NavigationTabsComponent} from '../navigation-tabs/navigation-tabs.compon
     encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent {
-    constructor(private router: Router) {}
+  constructor() {}
 }

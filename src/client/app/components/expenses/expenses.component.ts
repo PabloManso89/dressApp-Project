@@ -20,8 +20,8 @@ export class ExpensesComponent implements OnInit {
     this.chart = c3.generate({
       data: {
         columns: [
-          ['2018', 30, 200, 100, 400, 150, 250],
-          ['2017', 130, 100, 140, 200, 150, 50]
+          ['2018', 30, 200, 100, 400, 150],
+          ['2017', 130, 100, 140, 200, 150]
         ],
         type: 'bar'
       },
@@ -31,16 +31,6 @@ export class ExpensesComponent implements OnInit {
         }
       }
     });
-  }
-
-  onChangeTheme() {
-    this.isTheme = !this.isTheme;
-  }
-
-  onSetTheme(theme) {
-    this.overlayContainer.getContainerElement().classList.add(theme);
-    this.componentCssClass = theme;
-    this.isTheme = !this.isTheme;
   }
 
   onClickDonut () {

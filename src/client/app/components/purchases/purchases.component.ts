@@ -1,5 +1,5 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, HostBinding, ViewEncapsulation} from '@angular/core';
+import {OverlayContainer} from '@angular/cdk/overlay';
 
 @Component({
     selector: 'app-purchases',
@@ -8,21 +8,42 @@ import {Router} from '@angular/router';
     encapsulation: ViewEncapsulation.None
 })
 export class PurchasesComponent {
-    constructor(private router: Router) {}
+  @HostBinding('class') componentCssClass;
+  isTheme = false;
+  language = undefined;
 
-    onSelectHome({selected}) {
-        this.router.navigate(['home/']);
-    }
+  constructor(public overlayContainer: OverlayContainer) {}
 
-    onSelectExpenses({selected}) {
-        this.router.navigate(['expenses/']);
-    }
+  onChangeTheme() {
+    this.isTheme = !this.isTheme;
+  }
 
-    onSelectPurchases({selected}) {
-        this.router.navigate(['purchases/']);
-    }
+  onSetTheme(theme) {
+    this.overlayContainer.getContainerElement().classList.add(theme);
+    this.componentCssClass = theme;
+    this.isTheme = !this.isTheme;
+  }
 
-    onSelectSuggestions({selected}) {
-        this.router.navigate(['suggestions/']);
+  public setLanguage = (language: string) => {
+    let localeId = localStorage.getItem('localeId');
+    switch (language) {
+      case 'spanish':
+        localeId = 'es';
+        break;
+      case 'french':
+        localeId = 'fr';
+        break;
+      case 'english':
+        localeId = 'en';
+        break;
     }
+    // if (localeId === 'es') {
+    //   localeId = 'fr';
+    // } else {
+    //   localeId = 'es';
+    // }
+    localStorage.setItem('localeId', localeId);
+    console.log('locale set to:' + localeId);
+    location.reload(true);
+  }
 }

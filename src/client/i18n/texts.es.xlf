@@ -4,7 +4,7 @@
     <body>
       <trans-unit id="introductionHeader" datatype="html">
         <source>Hello i18n!</source>
-        <target>Hola i18n</target>
+        <target>Hola i18n!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/app.component.ts</context>
           <context context-type="linenumber">2</context>
@@ -14,7 +14,7 @@
       </trans-unit>
       <trans-unit id="introductionHeader2" datatype="html">
         <source>goodbye i18n!</source>
-        <target>adios i18n!</target>
+        <target>Adiós i18n!</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/app.component.ts</context>
           <context context-type="linenumber">4</context>

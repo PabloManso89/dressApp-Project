@@ -1,3 +1,18 @@
 <app-toolbar></app-toolbar>
 <app-navigation-tabs></app-navigation-tabs>
-<p>Suggestions</p>
+<div fxLayout="row" fxLayoutAlign="space-between stretch">
+  <div fxFlex="19" fxFlexOffset="1">
+    <mat-card tabindex="0">
+      <img *ngIf="!isTalking()" mat-card-image src="../../../assets/stylist.png" alt="Nika">
+      <img *ngIf="isTalking()" mat-card-image src="../../../assets/stylist1.png" alt="Nika">
+      <mat-card-content class="typing-element"></mat-card-content>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+        <button mat-raised-button color="primary" fxFlex="50" (click)="suggest()">Buy</button>
+        <button mat-raised-button color="primary" fxFlex="50" (click)="suggest()">Wear</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div fxFlex="81">
+  </div>
+</div>
+
