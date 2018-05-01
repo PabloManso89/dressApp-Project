@@ -1,7 +1,41 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatInputModule, MatTabsModule, MatToolbarModule, MatButtonModule, MatCardModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTooltipModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatStepperModule,
+  MatFormFieldModule
+} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -17,6 +51,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { OverlayModule} from '@angular/cdk/overlay';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MainComponent } from './components/main/main.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 
@@ -31,11 +67,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     NavigationTabsComponent,
     NotfoundComponent,
     NavigationTabsComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    MainComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatInputModule,
     AppRoutingModule,
@@ -45,7 +84,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatButtonModule,
     OverlayModule,
     FlexLayoutModule,
-    MatCardModule
+    MatCardModule,
+    MatStepperModule,
+    MatFormFieldModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr', useFactory: getLocalStorage }],
   bootstrap: [AppComponent]
