@@ -1,45 +1,81 @@
-<mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Datos Personales</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Nombre" formControlName="firstCtrl" required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Apellidos" formControlName="firstCtrl" required>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Email" formControlName="emailFormControl" required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Address" formControlName="firstCtrl" required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-</mat-horizontal-stepper>
-<button
-  mat-fab
-  class="done"
-  routerLink="/main">
-  <i class="material-icons">undo</i>
-</button>
+    <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Datos Personales</ng-template>
+
+          <mat-form-field>
+            <input matInput placeholder="Nombre" formControlName="nameControl" required>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Apellidos" formControlName="surnameControl" required>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Age">
+              <mat-option *ngFor="let age of ages" [value]="age">
+                {{ age }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Gender">
+              <mat-option *ngFor="let gender of genders" [value]="gender">{{ gender }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Email" formControlName="emailControl" required>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Datos de registro</ng-template>
+
+          <mat-form-field>
+            <input matInput placeholder="Login ID" formControlName="firstCtrl" required>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Password" formControlName="firstCtrl" type="password" required>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Confirm Password" formControlName="firstCtrl" type="password" required>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        You are now done.
+        <div>
+          <button mat-raised-button button color="primary"><i class="material-icons">done</i>Submit</button>
+          <button mat-button (click)="stepper.reset()"><i class="material-icons">replay</i>Reset</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+
+    <button
+      mat-fab
+      class="done"
+      routerLink="/main">
+      <i class="material-icons">undo</i>
+    </button>
