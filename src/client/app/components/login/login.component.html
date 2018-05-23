@@ -1,0 +1,26 @@
+<section class="sample-app-content">
+  <h1>LogIn</h1>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Email:</label>
+      <input type="email" formControlName="email"/>
+      <div [ngSwitch]="isErrorField(email)">
+        <span *ngSwitchCase="errorType.required">This field is required</span>
+        <span *ngSwitchCase="errorType.notEmail">This field has not a valid format for email</span>
+        <span *ngSwitchDefault=""></span>
+      </div>
+    </div>
+    <div>
+      <label>Password:</label>
+      <input type="password" formControlName="password"/>
+      <div [ngSwitch]="isErrorField(password)">
+        <span *ngSwitchCase="errorType.required">This field is required</span>
+        <span *ngSwitchCase="errorType.minlength">This field is too short</span>
+        <span *ngSwitchDefault=""></span>
+      </div>
+    </div>
+    <div>
+      <button type="submit" [disabled]="!form.valid">Submit</button>
+    </div>
+  </form>
+</section>
