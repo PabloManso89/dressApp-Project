@@ -46,19 +46,26 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
+      this.showSpinner = true;
       this.userService.isValidUser(this.email.value, this.password.value)
       .subscribe(validaUser => {
+        this.showSpinner = false;
         if (validaUser) {
           this.login();
+        } else {
+          this.showNotValidUser();
         }
       });
     } else {
-      // user not found
-      // TODO show alert()
+      this.showNotValidUser();
     }
-
-    console.log(this);
   }
+
+  private showNotValidUser(): void {
+    // TODO show alert()
+    alert('User not found');
+  }
+
   isErrorField(field): string | void {
     if (field.invalid && field.touched) {
       if (field.errors[this.errorType.required]) {
@@ -70,6 +77,15 @@ export class LoginComponent implements OnInit {
       }
     }
     return;
+  }
+
+  // TODO move this to register when its done
+  canDeactivate() {
+    return this.form.valid;
+  }
+
+  goToHome(): void {
+    this.router.navigate(['home']);
   }
 
 }

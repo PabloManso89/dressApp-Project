@@ -25,6 +25,7 @@ import { LoginModule } from './components/login/login.module';
 import { UsersService } from './services/users.service'
 
 import { LoginGuard } from './services/login.guard';
+import {UncompletedRegisterUserGuard} from './services/uncompleteRegisterUser.guard';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { LoginGuard } from './services/login.guard';
   providers: [
     UsersService,
     { provide: LOCALE_ID, useValue: 'fr', useFactory: getLocalStorage },
-    LoginGuard
+    LoginGuard,
+    UncompletedRegisterUserGuard
   ],
   bootstrap: [AppComponent]
 })
