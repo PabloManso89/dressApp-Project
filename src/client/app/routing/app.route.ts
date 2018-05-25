@@ -11,9 +11,9 @@ import {UncompletedRegisterUserGuard} from '../services/uncompleteRegisterUser.g
 export const routes: Routes = [
   {path: 'login', component: LoginComponent, canDeactivate: [UncompletedRegisterUserGuard]},
   {path: 'home', component: HomeComponent, canActivate: [LoginGuard] },
-  {path: 'purchases', component: PurchasesComponent},
-  {path: 'expenses', component: ExpensesComponent},
-  {path: 'suggestions', component: SuggestionsComponent},
+  {path: 'purchases', component: PurchasesComponent, canActivate: [LoginGuard]},
+  {path: 'expenses', component: ExpensesComponent, canActivate: [LoginGuard]},
+  {path: 'suggestions', component: SuggestionsComponent, canActivate: [LoginGuard]},
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: '**', component: NotfoundComponent},
 ];
