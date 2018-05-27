@@ -9,6 +9,7 @@ import { AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firest
 import { find } from 'lodash';
 
 import { Constants } from '../utils/constants';
+import {SessionService} from './session.service';
 
 @Injectable()
 export class UsersService {
@@ -20,7 +21,8 @@ export class UsersService {
   loggedUser: User;
 
   constructor(
-    public afs: AngularFirestore
+    public afs: AngularFirestore,
+    private sessionService: SessionService
   ) {
     // TODO move this to node
     this.userCollection = this.afs.collection(Constants.USER_COLLECTION);
@@ -29,9 +31,12 @@ export class UsersService {
     if (this.loggedUser === undefined) {
       this.userObservable = this.userCollection.doc(email).snapshotChanges().map(a => {
         const data = a.payload.data() as User;
-        this.loggedUser = data as User;
-        this.loggedUser.email = email;
-        data.id = a.payload.id;
+        if (data) {
+          this.loggedUser = data as User;
+          this.loggedUser.email = email;
+          data.id = a.payload.id;
+          this.sessionService.setNewSession(this.loggedUser);
+        }
         return data;
       });
     }
@@ -50,6 +55,7 @@ export class UsersService {
 
   isValidUser(email: string, password: string): Observable<boolean> {
     return this.getUserById(email).mergeMap((user) => {
+      if (!user) { return Observable.of(false); }
       return Observable.if(() => {return user.password === password; }, Observable.of(true), Observable.of(false));
     });
   }
@@ -59,7 +65,13 @@ export class UsersService {
   }
 
   isThereLoggedUser(): boolean {
-    return this.loggedUser !== undefined && this.loggedUser.email !== undefined && this.loggedUser.password !== undefined;
+    const loggedUser = this.sessionService.getLoggedUser();
+    return loggedUser && loggedUser.email !== undefined && loggedUser.password !== undefined;
+  }
+
+  logOutUser() {
+    this.sessionService.removeUser();
+    this.loggedUser = undefined;
   }
 
 }

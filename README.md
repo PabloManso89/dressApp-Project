@@ -55,9 +55,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Other documentation
 
-[Image Carousel on detail](https://github.com/lukasz-galka/ngx-gallery)
+-`Reactive programming` by using [RxJS](http://reactivex.io/)
 
-`i18n` : Its created by using Angular5 module i18n and through this command: 
+-[Image Carousel on detail](https://github.com/lukasz-galka/ngx-gallery)
+
+-`Spinner` made by using [ngx-spinner](https://www.npmjs.com/package/ngx-spinner)
+
+-`i18n` : Its created by using Angular5 module i18n and through this command: 
 `ng xi18n --outputPath src/client/i18n --outFile texts.es.xlf ng xi18n --locale es`
 This way we are saying:
 * Create a i18n file for translation

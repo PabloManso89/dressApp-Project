@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import 'rxjs/add/Observable/fromEvent'
 
 import { UsersService } from '../../services/users.service'
 import { User } from '../../models/User';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
 
   private loggedUser: User;
   form: FormGroup;
-  showSpinner: boolean;
 
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required, Validators.minLength(4)]);
@@ -29,7 +28,8 @@ export class LoginComponent implements OnInit {
   constructor(
     fb: FormBuilder,
     private userService: UsersService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {
       this.form = fb.group({
         'email': this.email,
@@ -46,10 +46,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      this.showSpinner = true;
+      this.spinner.show();
       this.userService.isValidUser(this.email.value, this.password.value)
       .subscribe(validaUser => {
-        this.showSpinner = false;
+        this.spinner.hide();
         if (validaUser) {
           this.login();
         } else {
