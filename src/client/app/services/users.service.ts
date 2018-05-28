@@ -10,6 +10,7 @@ import { find } from 'lodash';
 
 import { Constants } from '../utils/constants';
 import {SessionService} from './session.service';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class UsersService {
@@ -22,7 +23,8 @@ export class UsersService {
 
   constructor(
     public afs: AngularFirestore,
-    private sessionService: SessionService
+    private sessionService: SessionService,
+    private router: Router
   ) {
     // TODO move this to node
     this.userCollection = this.afs.collection(Constants.USER_COLLECTION);
@@ -72,6 +74,7 @@ export class UsersService {
   logOutUser() {
     this.sessionService.removeUser();
     this.loggedUser = undefined;
+    this.router.navigate(['login']);
   }
 
 }
