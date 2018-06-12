@@ -4,14 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
-  MatInputModule,
   MatListModule,
   MatRadioModule,
   MatSelectModule,
   MatTabsModule,
   MatToolbarModule,
   MatStepperModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatInputModule
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 
