@@ -11,10 +11,11 @@ import {
   MatToolbarModule,
   MatStepperModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatMenuModule,
+  MatIconModule
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ExpensesComponent } from './components/expenses/expenses.component';
@@ -22,7 +23,6 @@ import { PurchasesComponent } from './components/purchases/purchases.component';
 import { SuggestionsComponent } from './components/suggestions/suggestions.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { NavigationTabsComponent } from './components/navigation-tabs/navigation-tabs.component';
-
 import { AppRoutingModule } from './routing/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
@@ -66,7 +66,9 @@ import { RegisterComponent } from './components/register/register.component';
     MatFormFieldModule,
     MatSelectModule,
     MatRadioModule,
-    MatListModule
+    MatListModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr', useFactory: getLocalStorage }],
   bootstrap: [AppComponent]

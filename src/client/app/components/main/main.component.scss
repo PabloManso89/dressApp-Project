@@ -6,3 +6,40 @@
 .example-container > * {
   width: 100%;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  box-shadow: 0 0 12px rgba(0, 0 , 0, 0.8);
+  margin: 0 auto;
+  max-width: 1440px;
+  width: 100% !important;
+}
+
+.section {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0 auto;
+  padding: 0;
+  position: relative;
+  height: 500px;
+  width: 100% !important;
+  overflow: hidden;
+  max-width: 1440px;
+}
+
+.bloque1 {
+  background-image: url("/swagger/images/untitled-8_42879.jpg");
+}
+
+.bloque2 {
+  background-image: url("/swagger/images/201712091139566a75feb669e36acd67c9b97d1d99a5fc_med.jpg");
+}
+
+.bloque3 {
+  background-image: url("/swagger/images/untitled-8_42879.jpg");
+}

@@ -1,10 +1,26 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="mat-elevation-z4">
   <mat-toolbar-row>
     <span class="space"></span>
     <span>DressApp</span>
     <span class="space"></span>
-    <div fxFlexAlign="center">
-      <button mat-mini-fab><i class="material-icons" style="vertical-align: middle">account_circle</i></button>
-    </div>
+    <!--<div fxFlexAlign="center">-->
+      <!--<button mat-mini-fab><i class="material-icons" style="vertical-align: middle">account_circle</i></button>-->
+    <!--</div>-->
+    <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="a">Theme</button>
+      <button mat-menu-item [matMenuTriggerFor]="b">Language</button>
+      <button mat-menu-item>Log out</button>
+    </mat-menu>
+
+    <mat-menu #a="matMenu">
+      <button mat-menu-item>Theme</button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu>
+
+    <mat-menu #b="matMenu">
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>

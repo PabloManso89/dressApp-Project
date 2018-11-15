@@ -12,7 +12,6 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 export class ExpensesComponent implements OnInit {
   @HostBinding('class') componentCssClass;
   chart;
-  isTheme = false;
 
   constructor(public overlayContainer: OverlayContainer) {}
 
