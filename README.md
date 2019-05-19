@@ -1,24 +1,42 @@
 # dressApp-Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.0
+and it makes use of Angular 6 framework, Firebase 6 as DDBB and @angular/fire as module that helps to connect each other.
 
-This readme assumes you have the following tools available on your system: [Atlas Development](https://s08983dt.servers.kbc.be:6081/confluence/display/TOUCH/2016/01/20/atlas-development+has+a+new+home), EcmaScript6 and Node.
+This readme assumes you have the following tools available on your system: EcmaScript6, Node and Yarn.
 
 Easiest way to install Node is through Homebrew:
 
+    node --version
     brew install node@6
 
-Npm will be v2, you want v3:
-
+Npm latest version:
+    
+    npm --version
+    npm list -g -depth=0
     npm i -g npm
+    
+Yarn. Follow [these instructions](https://yarnpkg.com/en/docs/install).
 
+    yarn --version
+    brew install yarn
+
+## Clean everything
+
+    yarn clean
+    
+    or 
+    
+    rm -rf node_modules
+    
+    
 ## Install the node modules
 
-    npm install
+    yarn install
 
 ## Development server
 
-Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `yarn start` for a dev server and navigate to `http://localhost:4200/` or simply `yarn start --open`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
@@ -61,7 +79,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 -`Spinner` made by using [ngx-spinner](https://www.npmjs.com/package/ngx-spinner)
 
--`i18n` : Its created by using Angular5 module i18n and through this command: 
+-`i18n` : Its created by using Angular6 module i18n and through this command: 
 `ng xi18n --outputPath src/client/i18n --outFile texts.es.xlf ng xi18n --locale es`
 This way we are saying:
 * Create a i18n file for translation
@@ -83,5 +101,10 @@ In order to be able to change the language when the app is running, we are going
 when selecting other language, we save that language in the localStorage, refresh the application and when loading check the 
 localStorage to fetch the chosen language and load its corresponding translation file
 
+-`DDBB` :
+The used DDBB is in Firebase using a nonSQL model located in [Firebase DDBB](https://console.firebase.google.com/project/dressapp-fa71f/database/firestore/data~2Fusers~2)
 
+1. How to set up a simple DDBB: 
+
+2. 
 

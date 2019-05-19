@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/if';
+import { Observable, of as _of} from 'rxjs';
+import { mergeMap, map } from 'rxjs/operators';
 
 import { User } from '../models/User';
-import { AngularFirestore, AngularFirestoreCollection} from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import { find } from 'lodash';
 
 import { Constants } from '../utils/constants';
@@ -31,7 +29,8 @@ export class UsersService {
   }
   public getUserById(email: string): Observable<User> {
     if (this.loggedUser === undefined) {
-      this.userObservable = this.userCollection.doc(email).snapshotChanges().map(a => {
+
+      this.userObservable = this.userCollection.doc(email).snapshotChanges().pipe(map(a => {
         const data = a.payload.data() as User;
         if (data) {
           this.loggedUser = data as User;
@@ -40,26 +39,26 @@ export class UsersService {
           this.sessionService.setNewSession(this.loggedUser);
         }
         return data;
-      });
+      }));
     }
     return this.userObservable;
   }
 
   getUsers(): Observable<User[]> {
-    return this.users = this.userCollection.snapshotChanges().map(changes => {
+    return this.users = this.userCollection.snapshotChanges().pipe(map(changes => {
       return changes.map(a => {
         const data = a.payload.doc.data() as User;
         data.id = a.payload.doc.id;
         return data;
       })
-    });
+    }));
   }
 
   isValidUser(email: string, password: string): Observable<boolean> {
-    return this.getUserById(email).mergeMap((user) => {
-      if (!user) { return Observable.of(false); }
-      return Observable.if(() => {return user.password === password; }, Observable.of(true), Observable.of(false));
-    });
+    return this.getUserById(email).pipe(mergeMap((user) => {
+      if (!user) { return _of(false); }
+      return user.password === password ? _of(true) : _of(false);
+    }));
   }
 
   getLoggedUser(): User {

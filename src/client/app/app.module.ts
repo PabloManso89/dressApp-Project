@@ -6,8 +6,8 @@ import { MatInputModule, MatTabsModule, MatToolbarModule, MatButtonModule } from
 import { OverlayModule} from '@angular/cdk/overlay';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 

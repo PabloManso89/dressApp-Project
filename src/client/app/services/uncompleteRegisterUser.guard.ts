@@ -1,5 +1,3 @@
-
-
 import {ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot} from '@angular/router';
 import {LoginComponent} from '../components/login/login.component';
 
