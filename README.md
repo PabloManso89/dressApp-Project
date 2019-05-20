@@ -102,9 +102,49 @@ when selecting other language, we save that language in the localStorage, refres
 localStorage to fetch the chosen language and load its corresponding translation file
 
 -`DDBB` :
-The used DDBB is in Firebase using a nonSQL model located in [Firebase DDBB](https://console.firebase.google.com/project/dressapp-fa71f/database/firestore/data~2Fusers~2)
+The used DDBB is Firebase, a nonSQL document-oriented database, located in [Firebase DDBB](https://console.firebase.google.com/project/dressapp-fa71f/database/firestore/data~2Fusers~2) .
 
-1. How to set up a simple DDBB: 
+You can learn how to build it by following this tutorial https://angular-templates.io/tutorials/about/angular-crud-with-firebase
 
-2. 
+1. Add to the dependencies of your package.json
+
+    ```
+    "npm install --save @angular/fire": "5.0.0",
+    "npm install --save firebase": "5.1.0",
+    ```
+  
+    And do `npm install`.
+    
+2. Set up a simple DDBB: Log in with a Google account, go to Firebase app and create a new Project. We have create the collection Users, with all the users of the application. Each user document has the following structure: 
+
+    ```
+    pablo.manso@gmail.com: 
+    
+      age: 29
+      gender: true
+      name: 'Pablo'
+      email: 'pab.manso@gmail.com'
+    ```
+
+    The id of the document is unique, as the name of the document, in this case `pab.manso@gmail.com`
+
+3. The configuration to connect to the DDBB is in `environment.ts`, and it can be taken from the Firebase app once the project has been created.
+
+4. Set up the modules for Firebase: 
+
+    ```
+    import { AngularFireModule } from '@angular/fire';
+    import { AngularFirestoreModule } from '@angular/fire/firestore';
+    import { environment } from '../environments/environment';
+    ```
+    
+    ```
+    imports: [
+     	AngularFireModule.initializeApp(environment.firebase),
+     	AngularFirestoreModule,
+    	...
+    [
+    ```
+    
+    We also have a dedicated service to interact with the database, `users.service.ts`
 
