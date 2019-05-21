@@ -5,11 +5,12 @@ export interface IUser {
 
 export class User implements IUser {
   constructor(
-    public id: string,
     public email: string,
-    public name: string,
-    public age: string,
-    public gender: string,
-    public password: string
+    public password: string,
+    public id?: string,
+    public name?: string,
+    public age?: number,
+    public gender?: string,
+    public registrationDate?: Date,
   ) {}
 }

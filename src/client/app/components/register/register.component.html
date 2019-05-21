@@ -1,0 +1,51 @@
+<section class="sample-app-content">
+  <h1>LogIn</h1>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <label>Name:</label>
+      <input type="text" formControlName="name"/>
+      <div [ngSwitch]="isErrorField(form.controls.name)">
+        <span *ngSwitchCase="errorType.required">This field is required</span>
+      </div>
+    </div>
+    <div>
+      <label>Email:</label>
+      <input type="email" formControlName="email"/>
+      <div [ngSwitch]="isErrorField(form.controls.email)">
+        <span *ngSwitchCase="errorType.required">This field is required</span>
+        <span *ngSwitchCase="errorType.notEmail">This field has not a valid format for email</span>
+      </div>
+    </div>
+    <div>
+      <label>Password:</label>
+      <input type="password" formControlName="password"/>
+      <div [ngSwitch]="isErrorField(form.controls.password)">
+        <span *ngSwitchCase="errorType.required">This field is required</span>
+        <span *ngSwitchCase="errorType.minLength">This field is too short</span>
+        <span *ngSwitchCase="errorType.maxLength">This field is too long</span>
+      </div>
+    </div>
+    <div>
+      <label>Age:</label>
+      <input type="number" formControlName="age"/>
+      <div [ngSwitch]="isErrorField(form.controls.age)">
+        <span *ngSwitchCase="errorType.min">Minors of 14 years old are not allowed</span>
+        <span *ngSwitchCase="errorType.max">Too old</span>
+      </div>
+    </div>
+    <div>
+      <label>Gender:</label>
+      <input type="radio" name="gender" formControlName="gender" value="male"> Male<br>
+      <input type="radio" name="gender" formControlName="gender" value="female"> Female<br>
+    </div>
+    <div>
+      <button type="submit" [disabled]="!form.valid">Submit</button>
+    </div>
+    <ngx-spinner
+      bdColor="rgba(51,51,51,0.8)"
+      size="medium"
+      color="#fff"
+      loadingText="Loading..."
+      type="ball-scale-multiple"></ngx-spinner>
+  </form>
+</section>

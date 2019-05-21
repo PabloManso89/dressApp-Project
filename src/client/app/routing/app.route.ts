@@ -7,9 +7,11 @@ import { NotfoundComponent } from '../components/notfound/notfound.component';
 import { LoginComponent } from '../components/login/login.component';
 import {LoginGuard} from '../services/login.guard';
 import {UncompletedRegisterUserGuard} from '../services/uncompleteRegisterUser.guard';
+import {RegisterComponent} from '../components/register/register.component';
 
 export const routes: Routes = [
-  {path: 'login', component: LoginComponent, canDeactivate: [UncompletedRegisterUserGuard]},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent, canDeactivate: [UncompletedRegisterUserGuard]},
   {path: 'home', component: HomeComponent, canActivate: [LoginGuard] },
   {path: 'purchases', component: PurchasesComponent, canActivate: [LoginGuard]},
   {path: 'expenses', component: ExpensesComponent, canActivate: [LoginGuard]},

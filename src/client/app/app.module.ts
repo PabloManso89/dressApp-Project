@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // MODULES
 import { AppRoutingModule } from './routing/app-routing.module';
 import { LoginModule } from './components/login/login.module';
+import {RegisterModule} from './components/register/register.module';
 
 // COMPONENTS
 import { AppComponent } from './app.component';
@@ -61,7 +62,8 @@ import {UncompletedRegisterUserGuard} from './services/uncompleteRegisterUser.gu
     MatButtonModule,
     OverlayModule,
     FlexLayoutModule,
-    LoginModule
+    LoginModule,
+    RegisterModule,
   ],
   providers: [
     UsersService,

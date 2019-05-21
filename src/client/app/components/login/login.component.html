@@ -7,7 +7,6 @@
       <div [ngSwitch]="isErrorField(email)">
         <span *ngSwitchCase="errorType.required">This field is required</span>
         <span *ngSwitchCase="errorType.notEmail">This field has not a valid format for email</span>
-        <span *ngSwitchDefault=""></span>
       </div>
     </div>
     <div>
@@ -16,13 +15,17 @@
       <div [ngSwitch]="isErrorField(password)">
         <span *ngSwitchCase="errorType.required">This field is required</span>
         <span *ngSwitchCase="errorType.minlength">This field is too short</span>
-        <span *ngSwitchDefault=""></span>
       </div>
     </div>
     <div>
       <button type="submit" [disabled]="!form.valid">Submit</button>
       <button (click)="goToHome()" >home</button>
     </div>
+
+    <div>
+      Are you not a member yet? <br><span (click)="goToRegister()">Register</span>
+    </div>
+
     <ngx-spinner
       bdColor="rgba(51,51,51,0.8)"
       size="medium"

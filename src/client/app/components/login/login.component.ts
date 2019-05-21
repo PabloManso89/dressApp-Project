@@ -13,12 +13,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class LoginComponent implements OnInit {
 
-  private loggedUser: User;
-  form: FormGroup;
-
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required, Validators.minLength(4)]);
-  errorType = {
+  public form: FormGroup;
+  public email = new FormControl('', [Validators.required, Validators.email]);
+  public password = new FormControl('', [Validators.required, Validators.minLength(4)]);
+  public errorType = {
     required: 'required',
     minlength: 'minlength',
     notEmail: 'email',
@@ -26,32 +24,31 @@ export class LoginComponent implements OnInit {
   };
 
   constructor(
-    fb: FormBuilder,
-    private userService: UsersService,
-    private router: Router,
-    private spinner: NgxSpinnerService
-  ) {
-      this.form = fb.group({
-        'email': this.email,
-        'password': this.password
-      });
-    }
+    private _fb: FormBuilder,
+    private _userService: UsersService,
+    private _router: Router,
+    private _spinner: NgxSpinnerService
+  ) {}
 
-  ngOnInit() {
-    // this.userService.getUsers().subscribe( users => { console.log(users); });
-  }
-  login() {
-    this.router.navigate(['home']);
+  public ngOnInit() {
+    this.form = this._initForm();
   }
 
-  onSubmit() {
+  private _initForm(): FormGroup {
+    return this._fb.group({
+      'email': this.email,
+      'password': this.password
+    });
+  }
+
+  public onSubmit() {
     if (this.form.valid) {
-      this.spinner.show();
-      this.userService.isValidUser(this.email.value, this.password.value)
+      this._spinner.show();
+      this._userService.isValidUser(this.email.value, this.password.value)
       .subscribe(validaUser => {
-        this.spinner.hide();
+        this._spinner.hide();
         if (validaUser) {
-          this.login();
+          this.goToHome();
         } else {
           this.showNotValidUser();
         }
@@ -66,7 +63,7 @@ export class LoginComponent implements OnInit {
     alert('User not found');
   }
 
-  isErrorField(field): string | void {
+  public isErrorField(field): string | void {
     if (field.invalid && field.touched) {
       if (field.errors[this.errorType.required]) {
         return this.errorType.required;
@@ -79,13 +76,12 @@ export class LoginComponent implements OnInit {
     return;
   }
 
-  // TODO move this to register when its done
-  canDeactivate() {
-    return this.form.valid;
+  public goToHome(): void {
+    this._router.navigate(['home']);
   }
 
-  goToHome(): void {
-    this.router.navigate(['home']);
+  public goToRegister(): void {
+    this._router.navigate(['register']);
   }
 
 }
