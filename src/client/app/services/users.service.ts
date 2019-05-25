@@ -6,7 +6,7 @@ import { User } from '../models/User';
 import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import { find } from 'lodash';
 
-import {Constants, RESULT_VALUES} from '../utils/constants';
+import {Constants, RESULT_MESSAGES, RESULT_VALUES} from '../utils/constants';
 import {SessionService} from './session.service';
 import {Router} from '@angular/router';
 import {ComparisonSymbols, resultTypes} from '../utils/types';
@@ -50,7 +50,7 @@ export class UsersService {
       .get()
       .then((user: any) => {
       if (user.empty) {
-        result$.error('user not found');
+        result$.error(RESULT_MESSAGES.NON_FOUND_USER);
       } else if (user.docs.length === 1) {
         result$.next(user.docs[0].data());
       } else {
@@ -71,10 +71,10 @@ export class UsersService {
     }));
   }
 
-  public isRegisteredUser(email: string, password: string): Observable<User|undefined> {
+  public isRegisteredUser(email: string, password: string): Observable<User|resultTypes> {
    return this.getUserById(email).pipe(mergeMap((user) => {
-     if (!user) { return _of(false); }
-     return user.password === password ? _of(user) : _of(undefined);
+     if (!user) { return _of(RESULT_VALUES.NON_FOUND_USER); }
+     return user.password === password ? _of(user) : _of(RESULT_VALUES.INVALID_PASSWORD);
     }));
   }
 

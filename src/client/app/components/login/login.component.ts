@@ -6,6 +6,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {SessionService} from '../../services/session.service';
+import {RESULT_MESSAGES} from '../../utils/constants';
+import {resultTypes} from '../../utils/types';
 
 @Component({
   selector: 'app-login',
@@ -47,23 +49,18 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       this._spinner.show();
       this._userService.isRegisteredUser(this.email.value, this.password.value)
-      .subscribe(user => {
+      .subscribe((user: User|resultTypes) => {
         this._spinner.hide();
-        if (user) {
-          this._sessionService.setNewSession(user);
+        if (user && (user as User).email) {
+          this._sessionService.setNewSession(user as User);
           this.goToHome();
         } else {
-          this.showNotValidUser();
+          alert(RESULT_MESSAGES[user as resultTypes]);
         }
       });
     } else {
-      this.showNotValidUser();
+      alert(RESULT_MESSAGES.INVALID_FORM);
     }
-  }
-
-  private showNotValidUser(): void {
-    // TODO show alert()
-    alert();
   }
 
   public isErrorField(field): string | void {

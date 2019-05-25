@@ -15,7 +15,7 @@ export class LoginGuard implements CanActivate {
     if (this.userService.isThereLoggedUser()) {
       return true;
     } else {
-      window.alert('You need to be logged to get access to this page');
+      alert('You need to be logged to get access to this page');
       console.log('redirecting to Login page');
       this.router.navigate(['login']);
       return false;

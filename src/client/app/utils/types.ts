@@ -1,2 +1,2 @@
 export type ComparisonSymbols = '==';
-export type resultTypes = 'SUCCESS' | 'NON_FOUND_USER' | 'UNKNOWN_ERROR' | 'USER_ALREADY_REGISTERED';
+export type resultTypes = 'SUCCESS' | 'INVALID_PASSWORD' | 'INVALID_FORM' | 'NON_FOUND_USER' | 'UNKNOWN_ERROR' | 'USER_ALREADY_REGISTERED' | 'USER_SUCCESSFULLY_REGISTERED';
