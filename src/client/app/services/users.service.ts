@@ -6,9 +6,10 @@ import { User } from '../models/User';
 import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import { find } from 'lodash';
 
-import { Constants } from '../utils/constants';
+import {Constants, RESULT_VALUES} from '../utils/constants';
 import {SessionService} from './session.service';
 import {Router} from '@angular/router';
+import {ComparisonSymbols, resultTypes} from '../utils/types';
 
 @Injectable()
 export class UsersService {
@@ -29,13 +30,33 @@ export class UsersService {
   }
 
   // MANAGE EXISTING USERS
-  private _getUserById(email: string): Observable<User> {
+  public getUserById(email: string): Observable<User> {
     const result$ = new Subject<User>();
     if (!this.loggedUser) {
       this.userCollection.doc(email).get().subscribe((user: any) => {
         result$.next(user.exists ? user.data() : undefined);
       });
     }
+    return result$;
+  }
+
+  private _getUserByProperty(property: string, comparasionSymbol: string, comparisonValue: any, limit?: number):
+    Observable<User> | Observable<User[]> {
+    // By default, Cloud Firestore retrieves all documents that satisfy the query in ascending order by document ID,
+    // but you can order and limit the data returned.
+    const result$ = new Subject<User>();
+    this.userCollection.ref.where(property, comparasionSymbol as ComparisonSymbols, comparisonValue)
+      .limit(limit)
+      .get()
+      .then((user: any) => {
+      if (user.empty) {
+        result$.error('user not found');
+      } else if (user.docs.length === 1) {
+        result$.next(user.docs[0].data());
+      } else {
+        result$.next(user.docs);
+      }
+    });
     return result$;
   }
 
@@ -50,15 +71,11 @@ export class UsersService {
     }));
   }
 
-  public isValidUser(email: string, password: string): Observable<boolean> {
-    return this._getUserById(email).pipe(mergeMap((user) => {
-      if (!user) { return _of(false); }
-      return user.password === password ? _of(true) : _of(false);
+  public isRegisteredUser(email: string, password: string): Observable<User|undefined> {
+   return this.getUserById(email).pipe(mergeMap((user) => {
+     if (!user) { return _of(false); }
+     return user.password === password ? _of(user) : _of(undefined);
     }));
-  }
-
-  public getLoggedUser(): User {
-    return this.loggedUser;
   }
 
   public isThereLoggedUser(): boolean {
@@ -73,8 +90,8 @@ export class UsersService {
   }
 
   // REGISTER A NEW USER
-  public registerNewUser(newUser: User): Observable<boolean> {
-    const result$ = new Subject<boolean>();
+  public registerNewUser(newUser: User): Observable<resultTypes> {
+    const result$ = new Subject<resultTypes>();
 
     // There are two ways of adding data to the database:
     // 1. Using 'collection.doc(docName).set({}, {merge: boolean})' --> If there is not document with that docName,
@@ -96,11 +113,10 @@ export class UsersService {
           }
         ).then((data: any) => {
           console.log(data);
-          result$.next(true);
+          result$.next(RESULT_VALUES.USER_SUCCESSFULLY_REGISTERED as resultTypes);
         })
       } else {
-        alert('The user already exists');
-        result$.next(false);
+        result$.next(RESULT_VALUES.USER_ALREADY_REGISTERED as resultTypes);
       }
     });
     return result$;

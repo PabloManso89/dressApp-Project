@@ -5,6 +5,7 @@ import { User } from '../../models/User';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import {SessionService} from '../../services/session.service';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _userService: UsersService,
+    private _sessionService: SessionService,
     private _router: Router,
     private _spinner: NgxSpinnerService
   ) {}
@@ -44,10 +46,11 @@ export class LoginComponent implements OnInit {
   public onSubmit() {
     if (this.form.valid) {
       this._spinner.show();
-      this._userService.isValidUser(this.email.value, this.password.value)
-      .subscribe(validaUser => {
+      this._userService.isRegisteredUser(this.email.value, this.password.value)
+      .subscribe(user => {
         this._spinner.hide();
-        if (validaUser) {
+        if (user) {
+          this._sessionService.setNewSession(user);
           this.goToHome();
         } else {
           this.showNotValidUser();
@@ -60,7 +63,7 @@ export class LoginComponent implements OnInit {
 
   private showNotValidUser(): void {
     // TODO show alert()
-    alert('User not found');
+    alert();
   }
 
   public isErrorField(field): string | void {

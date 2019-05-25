@@ -4,6 +4,8 @@ import { UsersService } from '../../services/users.service'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import {RESULT_MESSAGES} from '../../utils/constants';
+import {resultTypes} from '../../utils/types';
 
 @Component({
   selector: 'app-login',
@@ -74,17 +76,15 @@ export class RegisterComponent implements OnInit {
 
   public onSubmit() {
     this._spinner.show();
-    this._userService.registerNewUser(this.form.value).subscribe((response: boolean) => {
+    this._userService.registerNewUser(this.form.value).subscribe((resultcode: resultTypes) => {
       this._spinner.hide();
-      const message = response ?
-        'The has been successfully registered' : 'There has been a technical problem, please try to repeat o contact us';
-      alert(message);
+      alert(RESULT_MESSAGES[resultcode]);
       this._goToLogin();
     });
   }
 
   public canDeactivate() {
-    return this.form.valid;
+    return !this.form.touched || this.form.valid;
   }
 
 }
