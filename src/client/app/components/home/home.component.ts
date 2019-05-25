@@ -9,5 +9,7 @@ import {NavigationTabsComponent} from '../navigation-tabs/navigation-tabs.compon
     encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent {
-  constructor() {}
+  constructor() {
+    console.log('home');
+  }
 }

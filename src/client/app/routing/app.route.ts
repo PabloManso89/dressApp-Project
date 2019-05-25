@@ -6,14 +6,15 @@ import { SuggestionsComponent } from '../components/suggestions/suggestions.comp
 import { NotfoundComponent } from '../components/notfound/notfound.component';
 import {MainComponent} from '../components/main/main.component';
 import {RegisterComponent} from '../components/register/register.component';
+import {AppComponent} from '../app.component'
 
 export const routes: Routes = [
   {path: 'main', component: MainComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'purchases', component: PurchasesComponent},
-  {path: 'expenses', component: ExpensesComponent},
-  {path: 'suggestions', component: SuggestionsComponent},
+  {path: 'home', component: AppComponent},
+  // {path: 'purchases', component: PurchasesComponent},
+  // {path: 'expenses', component: ExpensesComponent},
+  // {path: 'suggestions', component: SuggestionsComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', component: NotfoundComponent},
 ];

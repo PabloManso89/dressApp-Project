@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import * as Typed from 'typed.js';
+import Typed from 'typed.js';
 
 @Component({
     selector: 'app-suggestions',
@@ -27,6 +28,7 @@ export class SuggestionsComponent implements OnInit {
         clearInterval(SuggestionsComponent.myVar);
       }
     };
+    console.log('suggestions');
   }
 
   isTalking(): boolean {
@@ -36,6 +38,7 @@ export class SuggestionsComponent implements OnInit {
   ngOnInit() {
     SuggestionsComponent.myVar = setInterval(this.talking, 200);
     this.typed = new Typed('.typing-element', this.options);
+    console.log('init initiated')
   }
 
   /**

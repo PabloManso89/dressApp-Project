@@ -13,7 +13,9 @@ export class ExpensesComponent implements OnInit {
   @HostBinding('class') componentCssClass;
   chart;
 
-  constructor(public overlayContainer: OverlayContainer) {}
+  constructor(public overlayContainer: OverlayContainer) {
+    console.log('expenses');
+  }
 
   ngOnInit() {
     this.chart = c3.generate({

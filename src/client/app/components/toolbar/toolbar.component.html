@@ -8,19 +8,24 @@
     <!--</div>-->
     <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item [matMenuTriggerFor]="a">Theme</button>
-      <button mat-menu-item [matMenuTriggerFor]="b">Language</button>
-      <button mat-menu-item>Log out</button>
+      <button mat-menu-item [matMenuTriggerFor]="a"><i class="material-icons">color_lens</i></button>
+      <button mat-menu-item [matMenuTriggerFor]="b"><i class="material-icons">language</i></button>
+      <button mat-menu-item><i class="material-icons">help</i></button>
+      <button mat-menu-item><i class="material-icons">exit_to_app</i></button>
     </mat-menu>
 
     <mat-menu #a="matMenu">
-      <button mat-menu-item>Theme</button>
-      <button mat-menu-item>Item 2</button>
+      <button mat-menu-item>
+        <button mat-mini-fab style="background-color: #673ab7" (click)="onSetTheme('my-app-theme')"></button>
+      </button>
+      <button mat-menu-item><button mat-mini-fab style="background-color: #e91e63" (click)="onSetTheme('pink-theme')"></button></button>
+      <button mat-menu-item><button mat-mini-fab style="background-color: #80deea" (click)="onSetTheme('light-theme')"></button></button>
     </mat-menu>
 
     <mat-menu #b="matMenu">
-      <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
+      <button mat-menu-item> <img src="../../../assets/spain.png" style="max-width: 40px" (click)="setLanguage('spanish')"></button>
+      <button mat-menu-item><img src="../../../assets/france.png" style="max-width: 40px" (click)="setLanguage('french')"></button>
+      <button mat-menu-item><img src="../../../assets/uk.png" style="max-width: 40px"></button>
     </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -23,7 +23,7 @@ export class NavigationTabsComponent {
       label: 'Purchases',
       path: '/purchases'
     }
-  ]
+  ];
 
   constructor() { }
 }

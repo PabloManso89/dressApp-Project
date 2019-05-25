@@ -12,7 +12,9 @@ export class PurchasesComponent {
   isTheme = false;
   language = undefined;
 
-  constructor(public overlayContainer: OverlayContainer) {}
+  constructor(public overlayContainer: OverlayContainer) {
+    console.log('purchases');
+  }
 
   onChangeTheme() {
     this.isTheme = !this.isTheme;
@@ -22,28 +24,5 @@ export class PurchasesComponent {
     this.overlayContainer.getContainerElement().classList.add(theme);
     this.componentCssClass = theme;
     this.isTheme = !this.isTheme;
-  }
-
-  public setLanguage = (language: string) => {
-    let localeId = localStorage.getItem('localeId');
-    switch (language) {
-      case 'spanish':
-        localeId = 'es';
-        break;
-      case 'french':
-        localeId = 'fr';
-        break;
-      case 'english':
-        localeId = 'en';
-        break;
-    }
-    // if (localeId === 'es') {
-    //   localeId = 'fr';
-    // } else {
-    //   localeId = 'es';
-    // }
-    localStorage.setItem('localeId', localeId);
-    console.log('locale set to:' + localeId);
-    location.reload(true);
   }
 }

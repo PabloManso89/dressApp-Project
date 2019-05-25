@@ -1,26 +1,20 @@
-<app-toolbar></app-toolbar>
-<app-navigation-tabs></app-navigation-tabs>
+<!--<app-toolbar></app-toolbar>-->
+<!--<app-navigation-tabs></app-navigation-tabs>-->
 <p>Purchases</p>
-<div fxLayout="row" fxLayoutAlign="space-between stretch" >
-  <div fxLayout="row" fxLayoutAlign="start none" fxLayoutGap="10px">
-    <button mat-mini-fab color="primary" (click)="onChangeTheme()"><i class="material-icons">format_color_fill</i></button>
-    <span *ngIf="isTheme">
-        <button mat-mini-fab style="background-color: #673ab7" (click)="onSetTheme('my-app-theme')"></button>
-        <button mat-mini-fab style="background-color: #e91e63" (click)="onSetTheme('pink-theme')"></button>
-        <button mat-mini-fab style="background-color: #80deea" (click)="onSetTheme('light-theme')"></button>
-      </span>
-  </div>
-  <div fxLayout="row" fxLayoutAlign="end">
-    <button mat-raised-button color="primary">primary</button>
-    <button mat-raised-button color="accent">accent</button>
-    <button mat-raised-button color="warn">warn</button>
-  </div>
-</div>
+<!--<div fxLayout="row" fxLayoutAlign="space-between stretch" >-->
+<!--  <div fxLayout="row" fxLayoutAlign="start none" fxLayoutGap="10px">-->
+<!--    <button mat-mini-fab color="primary" (click)="onChangeTheme()"><i class="material-icons">format_color_fill</i></button>-->
+<!--    <span *ngIf="isTheme">-->
+<!--        <button mat-mini-fab style="background-color: #673ab7" (click)="onSetTheme('my-app-theme')"></button>-->
+<!--        <button mat-mini-fab style="background-color: #e91e63" (click)="onSetTheme('pink-theme')"></button>-->
+<!--        <button mat-mini-fab style="background-color: #80deea" (click)="onSetTheme('light-theme')"></button>-->
+<!--      </span>-->
+<!--  </div>-->
+<!--  <div fxLayout="row" fxLayoutAlign="end">-->
+<!--    <button mat-raised-button color="primary">primary</button>-->
+<!--    <button mat-raised-button color="accent">accent</button>-->
+<!--    <button mat-raised-button color="warn">warn</button>-->
+<!--  </div>-->
+<!--</div>-->
 <h1 i18n="site header|An introduction header for this sample@@introductionHeader">Hello i18n!</h1>
-<!--<ng-container i18n>I don't output any element</ng-container>-->
-<div>
-  <img src="../../../assets/spain.png" style="max-width: 40px" (click)="setLanguage('spanish')">
-  <img src="../../../assets/france.png" style="max-width: 40px" (click)="setLanguage('french')">
-  <img src="../../../assets/uk.png" style="max-width: 40px">
-</div>
 <h1 i18n="site header|An introduction header for this sample@@introductionHeader2">goodbye i18n!</h1>

@@ -1,15 +1,37 @@
- <nav mat-tab-nav-bar>
-   <a mat-tab-link
-      *ngFor="let link of navLinks"
-      [routerLink]="link.path"
-      routerLinkActive #rla="routerLinkActive"
-      [active]="rla.isActive">
-     {{link.label}}
-   </a>
- </nav>
- <!--<mat-tab-group>-->
-   <!--<mat-tab label="Home"><app-home></app-home></mat-tab>-->
-   <!--<mat-tab label="Expenses"><app-expenses></app-expenses></mat-tab>-->
-   <!--<mat-tab label="Suggestions"><app-suggestions></app-suggestions></mat-tab>-->
-   <!--<mat-tab label="Purchases"><app-purchases></app-purchases></mat-tab>-->
- <!--</mat-tab-group>-->
+<!-- <nav mat-tab-nav-bar>-->
+<!--   <a mat-tab-link-->
+<!--      *ngFor="let link of navLinks"-->
+<!--      [routerLink]="link.path"-->
+<!--      routerLinkActive #rla="routerLinkActive"-->
+<!--     [active]="rla.isActive">-->
+<!--     {{link.label}}-->
+<!--   </a>-->
+<!-- </nav>-->
+ <mat-tab-group>
+   <mat-tab label="Home">
+<!--     <ng-template matTabContent>-->
+<!--       <p>a</p>-->
+      <app-home></app-home>
+<!--     </ng-template>-->
+   </mat-tab>
+   <mat-tab label="Expenses">
+<!--     <ng-template matTabContent>-->
+<!--       b-->
+      <app-expenses></app-expenses>
+<!--     </ng-template>-->
+   </mat-tab>
+   <mat-tab label="Suggestions">
+<!--     <ng-template matTabContent>-->
+<!--       c-->
+       <app-suggestions></app-suggestions>
+<!--     </ng-template>-->
+   </mat-tab>
+   <mat-tab label="Purchases">
+<!--     <ng-template matTabContent>-->
+<!--       d-->
+       <app-purchases></app-purchases>
+<!--     </ng-template>-->
+   </mat-tab>
+ </mat-tab-group>
+<!-- <router-outlet></router-outlet>-->
+
