@@ -57,6 +57,9 @@ export class LoginComponent implements OnInit {
         } else {
           alert(RESULT_MESSAGES[user as resultTypes]);
         }
+      }, error => {
+        alert(error);
+        this._spinner.hide();
       });
     } else {
       alert(RESULT_MESSAGES.INVALID_FORM);
