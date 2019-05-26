@@ -1,8 +1,9 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span class="space"></span>
+    <span class="toolbar__space"></span>
     <span>DressApp</span>
-    <span class="space"></span>
-    <a><i class="material-icons" style="vertical-align: middle">account_circle</i></a>
+    <span class="toolbar__space"></span>
+    <a (click)="logout()" class="toolbar__icon-wrapper"><i class="material-icons toolbar__icon" style="vertical-align: middle">settings_power</i></a>
+    <a class="toolbar__icon-wrapper"><i class="material-icons toolbar__icon" style="vertical-align: middle">account_circle</i></a>
   </mat-toolbar-row>
 </mat-toolbar>
