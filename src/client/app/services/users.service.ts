@@ -40,20 +40,29 @@ export class UsersService {
     return result$;
   }
 
-  private _getUserByProperty(property: string, comparasionSymbol: string, comparisonValue: any, limit?: number): Observable<User[]> {
+  private _getUserByProperty(property: string, comparasionSymbol: string, comparisonValue: any, limit?: number,
+                             order?: {prop: string, order?: any}): Observable<User[]|resultTypes> {
     // By default, Cloud Firestore retrieves all documents that satisfy the query in ascending order by document ID,
     // but you can order and limit the data returned.
-    const result$ = new Subject<User[]>();
+
+    // However, if you have a filter with a range comparison (<, <=, >, >=), your first ordering must be on the same field:
+    const result$ = new Subject<User[]|resultTypes>();
     this.userCollection.ref.where(property, comparasionSymbol as ComparisonSymbols, comparisonValue)
       .limit(limit)
+      // .orderBy(order.prop, order.order)
       .get()
       .then((user: any) => {
-      if (user.empty) {
-        result$.error(RESULT_MESSAGES.NON_FOUND_USER);
-      } else {
-        result$.next(user.docs);
-      }
-    });
+        if (user.empty) {
+          result$.next(RESULT_VALUES.NON_FOUND_USER as resultTypes);
+        } else {
+          result$.next(user.docs);
+        }
+      },
+        error => {
+          console.error(error);
+          result$.error(RESULT_MESSAGES.UNKNOWN_ERROR)
+        }
+      );
     return result$;
   }
 
@@ -68,13 +77,17 @@ export class UsersService {
     }));
   }
 
-  public isRegisteredUser(email: string, password: string): Observable<User|resultTypes> {
+  public isRegisteredUser(email: string, password?: string): Observable<User|resultTypes> {
     const result$ = new Subject<User|resultTypes>();
     this._getUserByProperty('email', COMPARISON_SYMBOLS.EQUALS, email, 1)
     .subscribe(
       (doc: any) => {
-        result$.next(doc[0].data().password === password ? doc[0].data() : RESULT_VALUES.INVALID_PASSWORD);
-      }, error => result$.error(error)
+        if (!doc[0]) {
+          result$.next(doc);
+        } else {
+          doc[0].data().password === password ? result$.next( doc[0].data()) : result$.next(RESULT_VALUES.INVALID_PASSWORD);
+        }
+      }
     );
     return result$;
   }
@@ -101,8 +114,10 @@ export class UsersService {
     // 2. Using 'collection.add()' --> With this way you can handle a promise that returns the automatically assigned ID,
     // however you can not choose the name of the document.
 
-    this.userCollection.doc(newUser.email).get().subscribe((user: any) => {
-      if (!user.exists) {
+    this._getUserByProperty('email', COMPARISON_SYMBOLS.EQUALS, newUser.email, 1).subscribe((doc: any) => {
+      if (typeof doc === 'object' && doc[0].exists) {
+        result$.next(RESULT_VALUES.USER_ALREADY_REGISTERED as resultTypes);
+      } else {
         this.userCollection.add(
           {
             name: newUser.name,
@@ -116,8 +131,6 @@ export class UsersService {
           console.log(data);
           result$.next(RESULT_VALUES.USER_SUCCESSFULLY_REGISTERED as resultTypes);
         })
-      } else {
-        result$.next(RESULT_VALUES.USER_ALREADY_REGISTERED as resultTypes);
       }
     });
     return result$;

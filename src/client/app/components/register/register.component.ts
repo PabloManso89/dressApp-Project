@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UsersService } from '../../services/users.service'
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {RESULT_MESSAGES} from '../../utils/constants';
@@ -16,13 +16,15 @@ export class RegisterComponent implements OnInit {
 
   public form: FormGroup;
   public passwordValidator = [];
+  public passwordValidator2 = [];
+  public passMatcher: any;
   errorType = {
     min: 'min',
-    minLength: 'minLength',
+    minLength: 'minlength',
     max: 'max',
-    maxLength: 'maxLength',
-    notEmail: 'email',
-    notUserFound: 'notUserFound',
+    maxLength: 'maxlength',
+    noEmail: 'email',
+    noPasswordMatch: 'noPasswordMatch',
     required: 'required'
   };
 
@@ -38,6 +40,19 @@ export class RegisterComponent implements OnInit {
     this.passwordValidator.push(Validators.minLength(4));
     this.passwordValidator.push(Validators.maxLength(4));
 
+    this.passwordValidator2.push(Validators.required);
+    this.passwordValidator2.push(Validators.minLength(4));
+    this.passwordValidator2.push(Validators.maxLength(4));
+
+    this.passMatcher = (control: AbstractControl): {[key: string]: boolean} => {
+      if (!this.form) {return null}
+      const pass = this.form.get('password');
+      const confirm = this.form.get('passwordConfirmation');
+      if (!pass || !confirm) {return null}
+      return pass.value === confirm.value ? null : { noPasswordMatch: true };
+    };
+
+    this.passwordValidator2.push(this.passMatcher);
     this.form = this._initForm();
   }
 
@@ -46,6 +61,7 @@ export class RegisterComponent implements OnInit {
       'name': new FormControl('', [Validators.required]),
       'email': new FormControl('', [Validators.required, Validators.email]),
       'password': new FormControl('', [Validators.compose(this.passwordValidator)]),
+      'passwordConfirmation': new FormControl('', [Validators.compose(this.passwordValidator2)]),
       'age': new FormControl(undefined, [Validators.min(14), Validators.max(100)]),
       'gender': new FormControl('', [])
     });
@@ -63,8 +79,10 @@ export class RegisterComponent implements OnInit {
         return this.errorType.minLength;
       } else if (field.errors[this.errorType.maxLength]) {
         return this.errorType.maxLength;
-      } else if (field.errors[this.errorType.notEmail]) {
-        return this.errorType.notEmail;
+      } else if (field.errors[this.errorType.noEmail]) {
+        return this.errorType.noEmail;
+      } else if (field.errors[this.errorType.noPasswordMatch]) {
+        return this.errorType.noPasswordMatch;
       }
     }
     return;
@@ -76,9 +94,9 @@ export class RegisterComponent implements OnInit {
 
   public onSubmit() {
     this._spinner.show();
-    this._userService.registerNewUser(this.form.value).subscribe((resultcode: resultTypes) => {
+    this._userService.registerNewUser(this.form.value).subscribe((resultCode: resultTypes) => {
       this._spinner.hide();
-      alert(RESULT_MESSAGES[resultcode]);
+      alert(RESULT_MESSAGES[resultCode]);
       this._goToLogin();
     });
   }

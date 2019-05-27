@@ -7,7 +7,9 @@ export class Constants {
 export const COMPARISON_SYMBOLS = {
   EQUALS: '==',
   BT: '>',
-  ST: '<'
+  BT_OR_EQUALS: '>=',
+  ST: '<',
+  ST_OR_EQUALS: '<='
 };
 
 export const RESULT_VALUES = {

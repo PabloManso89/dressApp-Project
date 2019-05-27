@@ -22,8 +22,7 @@ export class LoginComponent implements OnInit {
   public errorType = {
     required: 'required',
     minlength: 'minlength',
-    notEmail: 'email',
-    notUserFound: 'notUserFound'
+    noEmail: 'email',
   };
 
   constructor(
@@ -54,8 +53,6 @@ export class LoginComponent implements OnInit {
         if (user && (user as User).email) {
           this._sessionService.setNewSession(user as User);
           this.goToHome();
-        } else {
-          alert(RESULT_MESSAGES[user as resultTypes]);
         }
       }, error => {
         alert(error);
@@ -72,8 +69,8 @@ export class LoginComponent implements OnInit {
         return this.errorType.required;
       } else if (field.errors[this.errorType.minlength]) {
         return this.errorType.minlength;
-      } else if (field.errors[this.errorType.notEmail]) {
-        return this.errorType.notEmail;
+      } else if (field.errors[this.errorType.noEmail]) {
+        return this.errorType.noEmail;
       }
     }
     return;
