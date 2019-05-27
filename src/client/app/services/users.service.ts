@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable, of as _of, Subject} from 'rxjs';
-import { mergeMap, map } from 'rxjs/operators';
+import { Observable, Subject} from 'rxjs';
+import { filter, map, mergeMap } from 'rxjs/operators';
 
 import { User } from '../models/User';
-import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, QueryDocumentSnapshot} from '@angular/fire/firestore';
 import { find } from 'lodash';
 
-import {Constants, RESULT_MESSAGES, RESULT_VALUES} from '../utils/constants';
+import {COMPARISON_SYMBOLS, Constants, RESULT_MESSAGES, RESULT_VALUES} from '../utils/constants';
 import {SessionService} from './session.service';
 import {Router} from '@angular/router';
 import {ComparisonSymbols, resultTypes} from '../utils/types';
@@ -40,23 +40,29 @@ export class UsersService {
     return result$;
   }
 
-  private _getUserByProperty(property: string, comparasionSymbol: string, comparisonValue: any, limit?: number):
-    Observable<User> | Observable<User[]> {
+  private _getUserByProperty(property: string, comparasionSymbol: string, comparisonValue: any, limit?: number,
+                             order?: {prop: string, order?: any}): Observable<User[]|resultTypes> {
     // By default, Cloud Firestore retrieves all documents that satisfy the query in ascending order by document ID,
     // but you can order and limit the data returned.
-    const result$ = new Subject<User>();
+
+    // However, if you have a filter with a range comparison (<, <=, >, >=), your first ordering must be on the same field:
+    const result$ = new Subject<User[]|resultTypes>();
     this.userCollection.ref.where(property, comparasionSymbol as ComparisonSymbols, comparisonValue)
       .limit(limit)
+      // .orderBy(order.prop, order.order)
       .get()
       .then((user: any) => {
-      if (user.empty) {
-        result$.error(RESULT_MESSAGES.NON_FOUND_USER);
-      } else if (user.docs.length === 1) {
-        result$.next(user.docs[0].data());
-      } else {
-        result$.next(user.docs);
-      }
-    });
+        if (user.empty) {
+          result$.next(RESULT_VALUES.NON_FOUND_USER as resultTypes);
+        } else {
+          result$.next(user.docs);
+        }
+      },
+        error => {
+          console.error(error);
+          result$.error(RESULT_MESSAGES.UNKNOWN_ERROR)
+        }
+      );
     return result$;
   }
 
@@ -71,11 +77,19 @@ export class UsersService {
     }));
   }
 
-  public isRegisteredUser(email: string, password: string): Observable<User|resultTypes> {
-   return this.getUserById(email).pipe(mergeMap((user) => {
-     if (!user) { return _of(RESULT_VALUES.NON_FOUND_USER); }
-     return user.password === password ? _of(user) : _of(RESULT_VALUES.INVALID_PASSWORD);
-    }));
+  public isRegisteredUser(email: string, password?: string): Observable<User|resultTypes> {
+    const result$ = new Subject<User|resultTypes>();
+    this._getUserByProperty('email', COMPARISON_SYMBOLS.EQUALS, email, 1)
+    .subscribe(
+      (doc: any) => {
+        if (!doc[0]) {
+          result$.next(doc);
+        } else {
+          doc[0].data().password === password ? result$.next( doc[0].data()) : result$.next(RESULT_VALUES.INVALID_PASSWORD);
+        }
+      }
+    );
+    return result$;
   }
 
   public isThereLoggedUser(): boolean {
@@ -95,14 +109,16 @@ export class UsersService {
 
     // There are two ways of adding data to the database:
     // 1. Using 'collection.doc(docName).set({}, {merge: boolean})' --> If there is not document with that docName,
-    // a new one is created, otherwise it is overwritten. This alternative does not return a promise.
+    // a new one is created, otherwise it is overwritten.
 
     // 2. Using 'collection.add()' --> With this way you can handle a promise that returns the automatically assigned ID,
     // however you can not choose the name of the document.
 
-    this.userCollection.doc(newUser.email).get().subscribe((user: any) => {
-      if (!user.exists) {
-        this.userCollection.doc(newUser.email).set(
+    this._getUserByProperty('email', COMPARISON_SYMBOLS.EQUALS, newUser.email, 1).subscribe((doc: any) => {
+      if (typeof doc === 'object' && doc[0].exists) {
+        result$.next(RESULT_VALUES.USER_ALREADY_REGISTERED as resultTypes);
+      } else {
+        this.userCollection.add(
           {
             name: newUser.name,
             email: newUser.email.toLocaleLowerCase(),
@@ -115,8 +131,6 @@ export class UsersService {
           console.log(data);
           result$.next(RESULT_VALUES.USER_SUCCESSFULLY_REGISTERED as resultTypes);
         })
-      } else {
-        result$.next(RESULT_VALUES.USER_ALREADY_REGISTERED as resultTypes);
       }
     });
     return result$;

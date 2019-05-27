@@ -13,7 +13,7 @@
       <input type="email" formControlName="email"/>
       <div [ngSwitch]="isErrorField(form.controls.email)">
         <span *ngSwitchCase="errorType.required">This field is required</span>
-        <span *ngSwitchCase="errorType.notEmail">This field has not a valid format for email</span>
+        <span *ngSwitchCase="errorType.noEmail">This field has not a valid format for email</span>
       </div>
     </div>
     <div>
@@ -23,6 +23,16 @@
         <span *ngSwitchCase="errorType.required">This field is required</span>
         <span *ngSwitchCase="errorType.minLength">This field is too short</span>
         <span *ngSwitchCase="errorType.maxLength">This field is too long</span>
+      </div>
+    </div>
+    <div>
+      <label>Repeat the password:</label>
+      <input type="password" formControlName="passwordConfirmation"/>
+      <div [ngSwitch]="isErrorField(form.controls.passwordConfirmation)">
+        <span *ngSwitchCase="errorType.required">This field is required</span>
+        <span *ngSwitchCase="errorType.minLength">This field is too short</span>
+        <span *ngSwitchCase="errorType.maxLength">This field is too long</span>
+        <span *ngSwitchCase="errorType.noPasswordMatch">The repeated password has to match with the first password</span>
       </div>
     </div>
     <div>
